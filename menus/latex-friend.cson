@@ -1,0 +1,21 @@
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Sync PDF'
+      'command': 'latex-friend:syncpdf'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'latex-friend'
+      'submenu': [
+        {
+          'label': 'Sync PDF'
+          'command': 'latex-friend:syncpdf'
+        }
+      ]
+    ]
+  }
+]
