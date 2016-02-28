@@ -1,4 +1,4 @@
-LatexFriendView = require './latex-friend-view'
+LatexFriendViews = require './latex-friend-view'
 {CompositeDisposable} = require 'atom'
 subprocess = require 'child_process'
 
@@ -12,6 +12,7 @@ module.exports =
       default: "displayline"
 
   latexFriendView: null
+  LatexFriendNavigationView: null
   modalPanel: null
   subscriptions: null
   compiledCommandString: null
@@ -22,6 +23,7 @@ module.exports =
     @subscriptions = new CompositeDisposable
 
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:syncpdf': => @syncpdf()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:showNavigation': => @showNavigation()
     @subscriptions.add editor.onDidChangeCursorPosition => @syncpdf()
 
   deactivate: ->
@@ -31,11 +33,19 @@ module.exports =
 
   syncpdf: ->
     console.log 'Getting PDF reader in sync.'
-    editor = atom.workspace.getActiveTextEditor()
+    editor = @_getActiveTextEditor()
     if @isLaTeXFile(editor)
       line = @getBufferRow(editor)
       @notifyPDFReader(editor, line)
 
+  showNavigation: ->
+    console.log('called show navigation')
+    editor = @_getActiveTextEditor()
+    if @isLaTeXFile(editor)
+      structure = @parseStructure()
+      navigationView = new LatexFriendViews.LatexFriendNavigationView(structure)
+      @modalPanel = atom.workspace.addModalPanel(className: 'modalNavigation', item : navigationView.getElement())
+      @modalPanel.show()
 
   getBufferRow: (editor) ->
     return editor.getCursorBufferPosition()['row'] + 1
@@ -62,3 +72,30 @@ module.exports =
 
   isLaTeXFile: (editor) ->
     return editor.getBuffer().getBaseName().split('.').pop() == 'tex'
+
+  parseStructure: ->
+    editor = @_getActiveTextEditor()
+    levels =
+      '\\part{' : 1
+      '\\section{' : 2
+      '\\subsection{' : 3
+      '\\subsubsection{' : 4
+    points = []
+
+    editor.getBuffer().scan /\\(sub)*section\{(.*)\}/g, (match) =>
+      start = match.range.start.row
+      matchStr = match.matchText
+      name = matchStr.substring(matchStr.indexOf('{') + 1, matchStr.length - 1)
+      sub = matchStr.substring(0, matchStr.indexOf('{') + 1)
+      console.log(sub)
+      points.push
+        matchStr : matchStr
+        name : name
+        level : levels[sub]
+        start : start
+    console.log(points)
+
+    return points
+
+  _getActiveTextEditor: ->
+    return atom.workspace.getActiveTextEditor()

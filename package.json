@@ -1,12 +1,15 @@
 {
   "name": "latex-friend",
   "main": "./lib/latex-friend",
-  "version": "0.0.1",
-  "description": "Extra utilities for LaTeX editing.",
+  "version": "0.0.2",
+  "description": "Extra utilities for LaTeX editing",
   "keywords": [
   ],
   "activationCommands": {
-    "atom-workspace": "latex-friend:syncpdf"
+    "atom-workspace": [
+        "latex-friend:syncpdf",
+        "latex-friend:showNavigation"
+      ]
   },
   "repository": "https://github.com/ruivieira/latex-friend",
   "license": "MIT",

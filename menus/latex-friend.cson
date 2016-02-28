@@ -4,6 +4,10 @@
       'label': 'Sync PDF'
       'command': 'latex-friend:syncpdf'
     }
+    {
+      'label': 'Show structure'
+      'command': 'latex-friend:showNavigation'
+    }
   ]
 'menu': [
   {
@@ -14,6 +18,10 @@
         {
           'label': 'Sync PDF'
           'command': 'latex-friend:syncpdf'
+        }
+        {
+          'label' : 'Show structure'
+          'command' : 'latex-friend:showNavigation'
         }
       ]
     ]
