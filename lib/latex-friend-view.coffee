@@ -1,3 +1,6 @@
+{SelectListView, $$} = require 'atom-space-pen-views'
+Utils = require './latex-friend-utils'
+
 class exports.LatexFriendNavigationView
   constructor: (structure) ->
     @structure = structure
@@ -41,3 +44,23 @@ class exports.LatexFriendNavigationView
     pointRow.appendChild(pointLink)
 
     return pointRow
+
+class exports.LatexFriendReferencesView extends SelectListView
+ initialize: (references) ->
+   super
+   @addClass('overlay from-top')
+   @setItems(references)
+   @panel ?= atom.workspace.addModalPanel(item: this)
+   @panel.show()
+   @focusFilterEditor()
+
+ viewForItem: (item) ->
+   "<li>#{item}</li>"
+
+ confirmed: (item) ->
+   editor = Utils.getActiveTextEditor()
+   editor.insertText("\\ref{#{item}}")
+   @panel.hide()
+
+ cancelled: ->
+   console.log("This view was cancelled")

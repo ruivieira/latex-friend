@@ -1,4 +1,5 @@
 LatexFriendViews = require './latex-friend-view'
+Utils = require './latex-friend-utils'
 {CompositeDisposable} = require 'atom'
 subprocess = require 'child_process'
 
@@ -13,17 +14,19 @@ module.exports =
 
   latexFriendView: null
   LatexFriendNavigationView: null
-  modalPanel: null
+  navigationPanel: null
+  referencePanel: null
   subscriptions: null
   compiledCommandString: null
 
   activate: (state) ->
-    editor = atom.workspace.getActiveTextEditor()
+    editor = Utils.getActiveTextEditor()
 
     @subscriptions = new CompositeDisposable
 
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:syncpdf': => @syncpdf()
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:showNavigation': => @showNavigation()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:insertReference': => @insertReference()
     @subscriptions.add editor.onDidChangeCursorPosition => @syncpdf()
 
   deactivate: ->
@@ -33,19 +36,27 @@ module.exports =
 
   syncpdf: ->
     console.log 'Getting PDF reader in sync.'
-    editor = @_getActiveTextEditor()
-    if @isLaTeXFile(editor)
+    editor = Utils.getActiveTextEditor()
+    if Utils.isLaTeXFile(editor)
       line = @getBufferRow(editor)
       @notifyPDFReader(editor, line)
 
   showNavigation: ->
-    console.log('called show navigation')
-    editor = @_getActiveTextEditor()
-    if @isLaTeXFile(editor)
-      structure = @parseStructure()
+    console.log('called [show navigation]')
+    editor = Utils.getActiveTextEditor()
+    if Utils.isLaTeXFile(editor)
+      structure = Utils.parseStructure()
       navigationView = new LatexFriendViews.LatexFriendNavigationView(structure)
-      @modalPanel = atom.workspace.addModalPanel(className: 'modalNavigation', item : navigationView.getElement())
-      @modalPanel.show()
+      @navigationPanel = atom.workspace.addModalPanel(className: 'modalNavigation', item : navigationView.getElement())
+      @navigationPanel.show()
+
+  insertReference: ->
+    console.log('called [insert reference]')
+    editor = Utils.getActiveTextEditor()
+    if Utils.isLaTeXFile(editor)
+      references = Utils.parseReferences()
+      referenceView = new LatexFriendViews.LatexFriendReferencesView()
+      referenceView.initialize(references)
 
   getBufferRow: (editor) ->
     return editor.getCursorBufferPosition()['row'] + 1
@@ -69,33 +80,3 @@ module.exports =
     template = template.replace /\$source/, source
     console.log(template)
     return template
-
-  isLaTeXFile: (editor) ->
-    return editor.getBuffer().getBaseName().split('.').pop() == 'tex'
-
-  parseStructure: ->
-    editor = @_getActiveTextEditor()
-    levels =
-      '\\part{' : 1
-      '\\section{' : 2
-      '\\subsection{' : 3
-      '\\subsubsection{' : 4
-    points = []
-
-    editor.getBuffer().scan /\\(sub)*section\{(.*)\}/g, (match) =>
-      start = match.range.start.row
-      matchStr = match.matchText
-      name = matchStr.substring(matchStr.indexOf('{') + 1, matchStr.length - 1)
-      sub = matchStr.substring(0, matchStr.indexOf('{') + 1)
-      console.log(sub)
-      points.push
-        matchStr : matchStr
-        name : name
-        level : levels[sub]
-        start : start
-    console.log(points)
-
-    return points
-
-  _getActiveTextEditor: ->
-    return atom.workspace.getActiveTextEditor()

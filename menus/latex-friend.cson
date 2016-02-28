@@ -8,6 +8,10 @@
       'label': 'Show structure'
       'command': 'latex-friend:showNavigation'
     }
+    {
+      'label': 'Insert reference'
+      'command': 'latex-friend:insertReference'
+    }
   ]
 'menu': [
   {
@@ -23,6 +27,11 @@
           'label' : 'Show structure'
           'command' : 'latex-friend:showNavigation'
         }
+        {
+          'label' : 'Insert reference'
+          'command' : 'latex-friend:insertReference'
+        }
+
       ]
     ]
   }
