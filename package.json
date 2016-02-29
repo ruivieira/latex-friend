@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "atom-space-pen-views" : "*",
-    "space-pen" : "^5.1.2"
+    "space-pen" : "^5.1.2",
+    "lodash" : "^4.5.1"
   }
 }

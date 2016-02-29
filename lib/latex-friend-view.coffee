@@ -1,5 +1,6 @@
 {ScrollView, SelectListView, $$} = require 'atom-space-pen-views'
 {View} = require 'space-pen'
+{_} = require 'lodash'
 
 Utils = require './latex-friend-utils'
 
@@ -68,20 +69,22 @@ class exports.LatexFriendReferencesView extends SelectListView
 class exports.LatextFriendsTodoView extends SelectListView
   constructor: (structure) ->
     super
+    @structure = structure
     @addClass('from-top')
-    @setItems(structure)
-    console.log("From view")
-    console.log(structure)
+    names = _.map(structure, 'name')
+    console.log(names)
+    @setItems(names)
     @panel ?= atom.workspace.addModalPanel(item: this)
     @panel.show()
     @focusFilterEditor()
 
   viewForItem: (item) ->
-   "<li><span class='icon icon-checklist'>#{item.name}</span></li>"
+   "<li><span class='icon icon-checklist'>#{item}</span></li>"
 
   confirmed: (item) ->
     editor = Utils.getActiveTextEditor()
-    editor.setCursorBufferPosition([item.start, 0], {autoscroll : true})
+    selected = _.find(@structure, ['name', item])
+    editor.setCursorBufferPosition([selected.start, 0], {autoscroll : true})
     @cancel()
 
   cancel: ->
