@@ -8,7 +8,8 @@
   "activationCommands": {
     "atom-workspace": [
         "latex-friend:syncpdf",
-        "latex-friend:showNavigation"
+        "latex-friend:showNavigation",
+        "latex-friend:insertReference"
       ]
   },
   "repository": "https://github.com/ruivieira/latex-friend",

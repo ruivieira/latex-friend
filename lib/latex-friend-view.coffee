@@ -46,21 +46,26 @@ class exports.LatexFriendNavigationView
     return pointRow
 
 class exports.LatexFriendReferencesView extends SelectListView
- initialize: (references) ->
-   super
-   @addClass('overlay from-top')
-   @setItems(references)
-   @panel ?= atom.workspace.addModalPanel(item: this)
-   @panel.show()
-   @focusFilterEditor()
+  constructor: (references) ->
+    super
+    @references = references
+    @addClass('from-top')
+    @setItems(@references)
+    @panel ?= atom.workspace.addModalPanel(item: this)
+    @panel.show()
+    @focusFilterEditor()
+    console.log("Starting view")
 
- viewForItem: (item) ->
+  viewForItem: (item) ->
    "<li>#{item}</li>"
 
- confirmed: (item) ->
-   editor = Utils.getActiveTextEditor()
-   editor.insertText("\\ref{#{item}}")
-   @panel.hide()
+  confirmed: (item) ->
+    console.log("Confirming item #{item}")
+    editor = Utils.getActiveTextEditor()
+    editor.insertText("\\ref{#{item}}")
+    @cancel()
 
- cancelled: ->
-   console.log("This view was cancelled")
+  cancel: ->
+    super
+    console.log("Cancelling")
+    @panel.hide()

@@ -55,8 +55,7 @@ module.exports =
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
       references = Utils.parseReferences()
-      referenceView = new LatexFriendViews.LatexFriendReferencesView()
-      referenceView.initialize(references)
+      referenceView = new LatexFriendViews.LatexFriendReferencesView(references)
 
   getBufferRow: (editor) ->
     return editor.getCursorBufferPosition()['row'] + 1
