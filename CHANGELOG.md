@@ -1,3 +1,7 @@
+## 0.0.5
+* Fixed problem with fuzzy finder in TODO search
+* lodash is a dependency now
+
 ## 0.0.4
 * Search TODOs (labelled as `\todo`)
 
