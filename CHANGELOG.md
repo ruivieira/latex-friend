@@ -1,3 +1,7 @@
+## 0.0.3
+* Added insert and navigate references (`ctrl-alt-r`)
+* Switched Views to space-pen
+
 ## 0.0.2
 * Added navigation between sections (`ctrl-alt-n`)
 

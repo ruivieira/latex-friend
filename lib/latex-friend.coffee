@@ -46,9 +46,7 @@ module.exports =
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
       structure = Utils.parseStructure()
-      navigationView = new LatexFriendViews.LatexFriendNavigationView(structure)
-      @navigationPanel = atom.workspace.addModalPanel(className: 'modalNavigation', item : navigationView.getElement())
-      @navigationPanel.show()
+      navigationView = new LatexFriendViews.LatexFriendNavigationView(structure: structure)
 
   insertReference: ->
     console.log('called [insert reference]')

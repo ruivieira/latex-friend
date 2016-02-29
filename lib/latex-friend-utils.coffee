@@ -13,7 +13,7 @@ exports.parseStructure = ->
     '\\subsubsection{' : 4
   points = []
 
-  editor.getBuffer().scan /\\(sub)*section\{(.*)\}/g, (match) =>
+  editor.getBuffer().scan /\\(sub)*section\{([^}]+)\}/g, (match) =>
     start = match.range.start.row
     matchStr = match.matchText
     name = matchStr.substring(matchStr.indexOf('{') + 1, matchStr.length - 1)
@@ -24,14 +24,13 @@ exports.parseStructure = ->
       name : name
       level : levels[sub]
       start : start
-  console.log(points)
 
   return points
 
 exports.parseReferences = ->
   editor = exports.getActiveTextEditor()
   references = []
-  editor.getBuffer().scan /\\label\{(.*)\}/g, (match) =>
+  editor.getBuffer().scan /\\(?:th)?label{([^}]+)}/g, (match) =>
     matchStr = match.matchText
     ref = matchStr.substring(matchStr.indexOf('{') + 1, matchStr.length - 1)
     references.push(ref)

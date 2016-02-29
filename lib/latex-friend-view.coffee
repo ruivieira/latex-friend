@@ -1,49 +1,44 @@
-{SelectListView, $$} = require 'atom-space-pen-views'
+{ScrollView, SelectListView, $$} = require 'atom-space-pen-views'
+{View} = require 'space-pen'
+
 Utils = require './latex-friend-utils'
 
-class exports.LatexFriendNavigationView
+class exports.LatexFriendNavigationView extends View
+  constructor: ->
+    super
+    console.log("navigavion view constructor")
+    @panel ?= atom.workspace.addModalPanel(item: this)
+    @panel.show()
+
+  @content: (params) ->
+    console.log('starting content')
+    @div class: 'navigation', =>
+      @div class: 'select-list', =>
+        @ol class: 'list-group', =>
+          for section in params.structure
+              @li class: "level#{section.level}", start: section.start, click: 'selectSection', section.name
+
+  selectSection: (event, element) ->
+    start = parseInt( element.attr('start'), 10 )
+    editor = Utils.getActiveTextEditor()
+    editor.setCursorBufferPosition([start, 0], {autoscroll : true})
+    @panel.hide()
+
+class exports.LatexFriendsNavigationSubView extends ScrollView
   constructor: (structure) ->
-    @structure = structure
-    @element = document.createElement('div')
-    @element.classList.add('navigation')
+    super
+    @setItems(structure)
+    @focusFilterEditor()
+    console.log("Starting [nav sub view]")
+    console.log("Got #{structure.length} structures")
 
-    structureElement = document.createElement('div')
-    for point in @structure
-      pointRow = @_createLink(point)
-      @element.appendChild(pointRow)
+  viewForItem: (item) ->
+   "<li>#{item.name}</li>"
 
-  serialize: ->
-
-  destroy: ->
-    @element.remove()
-
-  getElement: ->
-    @element
-
-  processClick: (id) ->
-    console.log(id)
-
-  _createLink: (point) ->
-    pointRow = document.createElement('div')
-    pointRow.classList.add("level#{point.level}")
-
-    pointLink = document.createElement('a')
-    text = document.createTextNode(point.name)
-    pointLink.appendChild(text)
-
-    # add event listener
-    pointLink.addEventListener 'click', =>
-      # go to specific location
-      editor = atom.workspace.getActiveTextEditor()
-      editor.setCursorBufferPosition([point.start, 0], {autoscroll : true})
-      panel = atom.workspace.panelForItem(@element)
-      console.log(panel)
-      panel.hide()
-
-    pointLink.href = '#'
-    pointRow.appendChild(pointLink)
-
-    return pointRow
+  confirmed: (item) ->
+    editor = Utils.getActiveTextEditor()
+    editor.setCursorBufferPosition([item.start, 0], {autoscroll : true})
+    @cancel()
 
 class exports.LatexFriendReferencesView extends SelectListView
   constructor: (references) ->
@@ -57,7 +52,7 @@ class exports.LatexFriendReferencesView extends SelectListView
     console.log("Starting view")
 
   viewForItem: (item) ->
-   "<li>#{item}</li>"
+   "<li class='level#{item.level}'>#{item}</li>"
 
   confirmed: (item) ->
     console.log("Confirming item #{item}")
