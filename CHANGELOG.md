@@ -1,3 +1,6 @@
+## 0.0.6
+* Missing version of atom-space-pen-views
+
 ## 0.0.5
 * Fixed problem with fuzzy finder in TODO search
 * lodash is a dependency now
