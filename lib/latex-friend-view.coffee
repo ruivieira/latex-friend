@@ -77,7 +77,7 @@ class exports.LatextFriendsTodoView extends SelectListView
     @focusFilterEditor()
 
   viewForItem: (item) ->
-   "<li><span class='icon icon-checklist'>checklist</span> #{item.name}</li>"
+   "<li><span class='icon icon-checklist'>#{item.name}</span></li>"
 
   confirmed: (item) ->
     editor = Utils.getActiveTextEditor()
