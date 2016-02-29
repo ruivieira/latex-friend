@@ -27,6 +27,7 @@ module.exports =
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:syncpdf': => @syncpdf()
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:showNavigation': => @showNavigation()
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:insertReference': => @insertReference()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:showTodos': => @showTodos()
     @subscriptions.add editor.onDidChangeCursorPosition => @syncpdf()
 
   deactivate: ->
@@ -47,6 +48,13 @@ module.exports =
     if Utils.isLaTeXFile(editor)
       structure = Utils.parseStructure()
       navigationView = new LatexFriendViews.LatexFriendNavigationView(structure: structure)
+
+  showTodos: ->
+    console.log('called [show todos]')
+    editor = Utils.getActiveTextEditor()
+    if Utils.isLaTeXFile(editor)
+      structure = Utils.parseTodos()
+      view = new LatexFriendViews.LatextFriendsTodoView(structure)
 
   insertReference: ->
     console.log('called [insert reference]')

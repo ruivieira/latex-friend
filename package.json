@@ -1,7 +1,7 @@
 {
   "name": "latex-friend",
   "main": "./lib/latex-friend",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Extra utilities for LaTeX editing",
   "keywords": [
   ],
@@ -9,7 +9,8 @@
     "atom-workspace": [
         "latex-friend:syncpdf",
         "latex-friend:showNavigation",
-        "latex-friend:insertReference"
+        "latex-friend:insertReference",
+        "latex-friend:showTodos"
       ]
   },
   "repository": "https://github.com/ruivieira/latex-friend",

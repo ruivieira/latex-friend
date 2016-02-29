@@ -1,3 +1,6 @@
+## 0.0.4
+* Search TODOs (labelled as `\todo`)
+
 ## 0.0.3
 * Added insert and navigate references (`ctrl-alt-r`)
 * Switched Views to space-pen

@@ -9,6 +9,10 @@
       'command': 'latex-friend:showNavigation'
     }
     {
+      'label': 'Show TODOs'
+      'command': 'latex-friend:showTodos'
+    }
+    {
       'label': 'Insert reference'
       'command': 'latex-friend:insertReference'
     }
@@ -26,6 +30,10 @@
         {
           'label' : 'Show structure'
           'command' : 'latex-friend:showNavigation'
+        }
+        {
+          'label' : 'Show TODOs'
+          'command' : 'latex-friend:showTodos'
         }
         {
           'label' : 'Insert reference'

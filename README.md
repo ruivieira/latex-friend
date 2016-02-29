@@ -19,3 +19,9 @@ Use `ctrl-alt-n` for a navigational menu to quickly jump between sections.
 Provide the PDF Reader's path and sync argument in the package settings (a default for Skim on OS X is provided).
 
 ![latex-friend sync](http://ruivieira.org/static/images/projects/latexfriend/latex-friend-sync.gif)
+
+## Search TODOs
+
+Search TODO notes and jump to selected. TODOs are identified by the command `\todo` (as in the [todonotes](http://ctan.org/pkg/todonotes) package). Shortcuts are `ctrl-alt-t` or `Latex Friend:Show TODOs` from the palette.
+
+![latex-friend sync](http://ruivieira.org/static/images/projects/latexfriend/latex-friend-todos.gif)

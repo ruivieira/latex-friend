@@ -18,7 +18,6 @@ exports.parseStructure = ->
     matchStr = match.matchText
     name = matchStr.substring(matchStr.indexOf('{') + 1, matchStr.length - 1)
     sub = matchStr.substring(0, matchStr.indexOf('{') + 1)
-    console.log(sub)
     points.push
       matchStr : matchStr
       name : name
@@ -26,6 +25,22 @@ exports.parseStructure = ->
       start : start
 
   return points
+
+exports.parseTodos = ->
+  editor = exports.getActiveTextEditor()
+  points = []
+
+  editor.getBuffer().scan /\\todo\{([^}]+)\}/g, (match) =>
+    start = match.range.start.row
+    matchStr = match.matchText
+    name = matchStr.substring(matchStr.indexOf('{') + 1, matchStr.length - 1)
+    sub = matchStr.substring(0, matchStr.indexOf('{') + 1)
+    points.push
+      name : name
+      start : start
+
+  return points
+
 
 exports.parseReferences = ->
   editor = exports.getActiveTextEditor()

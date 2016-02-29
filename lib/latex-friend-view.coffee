@@ -64,3 +64,27 @@ class exports.LatexFriendReferencesView extends SelectListView
     super
     console.log("Cancelling")
     @panel.hide()
+
+class exports.LatextFriendsTodoView extends SelectListView
+  constructor: (structure) ->
+    super
+    @addClass('from-top')
+    @setItems(structure)
+    console.log("From view")
+    console.log(structure)
+    @panel ?= atom.workspace.addModalPanel(item: this)
+    @panel.show()
+    @focusFilterEditor()
+
+  viewForItem: (item) ->
+   "<li><span class='icon icon-checklist'>checklist</span> #{item.name}</li>"
+
+  confirmed: (item) ->
+    editor = Utils.getActiveTextEditor()
+    editor.setCursorBufferPosition([item.start, 0], {autoscroll : true})
+    @cancel()
+
+  cancel: ->
+    super
+    console.log("Cancelling")
+    @panel.hide()
