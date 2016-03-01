@@ -1,7 +1,7 @@
 {
   "name": "latex-friend",
   "main": "./lib/latex-friend",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Extra utilities for LaTeX editing",
   "keywords": [
   ],
@@ -10,7 +10,8 @@
         "latex-friend:syncpdf",
         "latex-friend:showNavigation",
         "latex-friend:insertReference",
-        "latex-friend:showTodos"
+        "latex-friend:showTodos",
+        "latex-friend:matrixBuilder"
       ]
   },
   "repository": "https://github.com/ruivieira/latex-friend",

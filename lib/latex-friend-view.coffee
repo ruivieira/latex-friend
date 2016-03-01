@@ -1,4 +1,4 @@
-{ScrollView, SelectListView, $$} = require 'atom-space-pen-views'
+{ScrollView, SelectListView, TextEditorView, $$} = require 'atom-space-pen-views'
 {View} = require 'space-pen'
 {_} = require 'lodash'
 
@@ -90,4 +90,38 @@ class exports.LatextFriendsTodoView extends SelectListView
   cancel: ->
     super
     console.log("Cancelling")
+    @panel.hide()
+
+class exports.MatrixBuilderView extends View
+  initialize: ->
+    console.log("Matrix builder constructor")
+
+    @panel ?= atom.workspace.addModalPanel(item: this)
+    @panel.show()
+
+  @content: (params) ->
+    console.log('starting matrix builder content')
+
+    @div class: 'navigation block', =>
+      @div =>
+        @div class: 'smallInput inline-block', =>
+          @label 'Rows'
+          @subview 'rows', new TextEditorView(mini: true)
+        @div class: 'smallInput inline-block', =>
+          @label 'Columns'
+          @subview 'columns', new TextEditorView(mini: true)
+      @div =>
+        @button class: 'btn', click: 'do', 'Insert'
+
+  do: (event, element) ->
+    console.log('Button pressed')
+    columns = parseInt(@panel.item.columns.getModel().buffer.lines[0], 10)
+    rows = parseInt(@panel.item.rows.getModel().buffer.lines[0], 10)
+    console.log("Creating matrix with [#{rows}x#{columns}]")
+    row = [0 for n in [0...columns]].map((i) -> i.toString()).join(',')
+    console.log(row)
+    m = (row for n in [0...rows])
+    matrix = "\\begin{bmatrix} #{m.join('\\\\')} \\end{bmatrix}"
+    editor = Utils.getActiveTextEditor()
+    editor.insertText(matrix)
     @panel.hide()

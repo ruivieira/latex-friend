@@ -8,6 +8,11 @@ Use `ctrl-alt-r` to browse, select and insert references to a `\label`.
 
 ![latex-friend references](http://i.imgur.com/smSgjkO.gif)
 
+## Matrix builder
+Creates a matrix by specifying the number of rows and columns (`ctrl-alt-m`).
+Uses the [amsmath](http://ctan.org/pkg/amsmath) package notation. At the moment,
+only `\bmatrix` supported. Further customization in future releases!
+
 ## Navigate section
 
 Use `ctrl-alt-n` for a navigational menu to quickly jump between sections.

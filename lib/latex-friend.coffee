@@ -28,6 +28,7 @@ module.exports =
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:showNavigation': => @showNavigation()
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:insertReference': => @insertReference()
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:showTodos': => @showTodos()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:matrixBuilder': => @matrixBuilder()
     @subscriptions.add editor.onDidChangeCursorPosition => @syncpdf()
 
   deactivate: ->
@@ -85,3 +86,9 @@ module.exports =
     template = template.replace /\$source/, source
     console.log(template)
     return template
+
+  matrixBuilder: ->
+    console.log('called [matrix builder]')
+    editor = Utils.getActiveTextEditor()
+    if Utils.isLaTeXFile(editor)
+      view = new LatexFriendViews.MatrixBuilderView()

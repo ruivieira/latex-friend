@@ -3,3 +3,4 @@
   'ctrl-alt-n': 'latex-friend:showNavigation'
   'ctrl-alt-r': 'latex-friend:insertReference'
   'ctrl-alt-t': 'latex-friend:showTodos'
+  'ctrl-alt-m': 'latex-friend:matrixBuilder'

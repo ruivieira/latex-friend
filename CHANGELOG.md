@@ -1,3 +1,6 @@
+## 0.0.7
+* Simple matrix builder (only amsmath's `\bmatrix` at the moment)
+
 ## 0.0.6
 * Missing version of atom-space-pen-views
 

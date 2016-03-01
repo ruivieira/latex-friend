@@ -16,6 +16,10 @@
       'label': 'Insert reference'
       'command': 'latex-friend:insertReference'
     }
+    {
+      'label': 'Matrix builder'
+      'command': 'latex-friend:matrixBuilder'
+    }
   ]
 'menu': [
   {
@@ -38,6 +42,10 @@
         {
           'label' : 'Insert reference'
           'command' : 'latex-friend:insertReference'
+        }
+        {
+          'label' : 'Matrix builder'
+          'command' : 'latex-friend:matrixBuilder'
         }
 
       ]
