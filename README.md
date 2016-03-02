@@ -16,8 +16,11 @@ only `\bmatrix` supported. Further customization in future releases!
 ## Navigation pane
 
 Provides a navigable tree with the document's sections.
+`ctrl-alt-p` or `Latex Friend:showNavigationPane` from the palette.
 
-The `TreeView` component is from the [symbols-tree-view](https://atom.io/packages/symbols-tree-view) project.
+![navigation pane](http://i.imgur.com/ijJPDm3.png)
+
+The `TreeView` component is based on the [symbols-tree-view](https://atom.io/packages/symbols-tree-view) project.
 
 ## Navigate section
 
