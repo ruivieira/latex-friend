@@ -1,3 +1,13 @@
+## 0.0.9
+
+### What's new?
+
+* PDF sync can be enabled/disabled from settings
+
+### Bug fixes
+
+* Correct execution of callbacks for editor row change
+
 ## 0.0.8
 
 * Added a navigation pane

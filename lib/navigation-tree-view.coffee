@@ -3,6 +3,7 @@
 {TreeView} = require './tree-view'
 utils = require './latex-friend-utils'
 {_} = require 'lodash'
+{CompositeDisposable} = require 'atom'
 
 module.exports =
   class NavigationTreeView extends View
@@ -12,6 +13,7 @@ module.exports =
 
     initialize: ->
       @nodes = []
+      @subscriptions = new CompositeDisposable
       @treeView = new TreeView
       @append(@treeView)
 
@@ -62,9 +64,12 @@ module.exports =
           filePath = editor.getPath()
           @generateNodes()
 
-        @onChangeRow = editor.onDidChangeCursorPosition ({oldBufferPosition, newBufferPosition}) =>
+        @subscriptions.add editor.onDidChangeCursorPosition ({oldBufferPosition, newBufferPosition}) =>
           if oldBufferPosition.row != newBufferPosition.row
             @focusCurrentCursorTag()
+        # @onChangeRow = editor.onDidChangeCursorPosition ({oldBufferPosition, newBufferPosition}) =>
+          # if oldBufferPosition.row != newBufferPosition.row
+            # @focusCurrentCursorTag()
 
     focusCurrentCursorTag: ->
       # select on tree based on text
@@ -74,6 +79,7 @@ module.exports =
         @treeView.select(node)
 
     nearestNode: (row) ->
+      # TODO: Change hardcoded value
       distance = 1000000
       closest = null
       for node in @nodes
@@ -152,7 +158,8 @@ module.exports =
 
     removeEventForEditor: ->
       @onEditorSave?.dispose()
-      @onChangeRow?.dispose()
+      # @onChangeRow?.dispose()
+      @subscriptions.dispose()
 
     detached: ->
       @onChangeEditor?.dispose()

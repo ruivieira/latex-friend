@@ -32,7 +32,9 @@ module.exports =
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:insertReference': => @insertReference()
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:showTodos': => @showTodos()
     @subscriptions.add atom.commands.add 'atom-workspace', 'latex-friend:matrixBuilder': => @matrixBuilder()
-    @subscriptions.add editor.onDidChangeCursorPosition => @syncpdf()
+    @subscriptions.add editor.onDidChangeCursorPosition =>
+      if atom.config.get('latex-friend.syncpdf')
+        @syncpdf()
 
   deactivate: ->
     @subscriptions.dispose()
