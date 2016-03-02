@@ -1,7 +1,7 @@
 {
   "name": "latex-friend",
   "main": "./lib/latex-friend",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Extra utilities for LaTeX editing",
   "keywords": [
   ],
@@ -9,6 +9,7 @@
     "atom-workspace": [
         "latex-friend:syncpdf",
         "latex-friend:showNavigation",
+        "latex-friend:showNavigationPane",
         "latex-friend:insertReference",
         "latex-friend:showTodos",
         "latex-friend:matrixBuilder"
@@ -22,6 +23,7 @@
   "dependencies": {
     "atom-space-pen-views" : "^2.2.0",
     "space-pen" : "^5.1.2",
-    "lodash" : "^4.5.1"
+    "lodash" : "^4.5.1",
+    "event-kit" : "^2.0.0"
   }
 }

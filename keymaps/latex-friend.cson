@@ -1,6 +1,7 @@
 'atom-workspace':
   'ctrl-alt-o': 'latex-friend:syncpdf'
   'ctrl-alt-n': 'latex-friend:showNavigation'
+  'ctrl-alt-p': 'latex-friend:showNavigationPane'
   'ctrl-alt-r': 'latex-friend:insertReference'
   'ctrl-alt-t': 'latex-friend:showTodos'
   'ctrl-alt-m': 'latex-friend:matrixBuilder'

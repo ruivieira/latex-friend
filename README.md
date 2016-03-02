@@ -13,6 +13,12 @@ Creates a matrix by specifying the number of rows and columns (`ctrl-alt-m`).
 Uses the [amsmath](http://ctan.org/pkg/amsmath) package notation. At the moment,
 only `\bmatrix` supported. Further customization in future releases!
 
+## Navigation pane
+
+Provides a navigable tree with the document's sections.
+
+The `TreeView` component is from the [symbols-tree-view](https://atom.io/packages/symbols-tree-view) project.
+
 ## Navigate section
 
 Use `ctrl-alt-n` for a navigational menu to quickly jump between sections.

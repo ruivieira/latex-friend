@@ -1,3 +1,7 @@
+## 0.0.8
+
+* Added a navigation pane
+
 ## 0.0.7
 * Simple matrix builder (only amsmath's `\bmatrix` at the moment)
 

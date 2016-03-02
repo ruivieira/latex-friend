@@ -9,6 +9,10 @@
       'command': 'latex-friend:showNavigation'
     }
     {
+      'label': 'Show structure pane'
+      'command': 'latex-friend:showNavigationPane'
+    }
+    {
       'label': 'Show TODOs'
       'command': 'latex-friend:showTodos'
     }
@@ -34,6 +38,10 @@
         {
           'label' : 'Show structure'
           'command' : 'latex-friend:showNavigation'
+        }
+        {
+          'label' : 'Show structure pane'
+          'command' : 'latex-friend:showNavigationPane'
         }
         {
           'label' : 'Show TODOs'
