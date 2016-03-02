@@ -3,6 +3,7 @@ NavigationTreeView = require './navigation-tree-view'
 Utils = require './latex-friend-utils'
 {CompositeDisposable} = require 'atom'
 subprocess = require 'child_process'
+parser = require './parser'
 
 module.exports =
   config:
@@ -52,28 +53,28 @@ module.exports =
     console.log('called [show navigation]')
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
-      structure = Utils.parseStructure()
+      structure = parser.parseStructure()
       navigationView = new LatexFriendViews.LatexFriendNavigationView(structure: structure)
 
   showNavigationPane: ->
     console.log('started navigation pane')
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
-      structure = Utils.parseStructure()
+      structure = parser.parseStructure()
       @navigationTreeView.showView()
 
   showTodos: ->
     console.log('called [show todos]')
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
-      structure = Utils.parseTodos()
+      structure = parser.parseTodos()
       view = new LatexFriendViews.LatextFriendsTodoView(structure)
 
   insertReference: ->
     console.log('called [insert reference]')
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
-      references = Utils.parseReferences()
+      references = parser.parseReferences()
       referenceView = new LatexFriendViews.LatexFriendReferencesView(references)
 
   getBufferRow: (editor) ->

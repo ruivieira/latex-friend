@@ -5,6 +5,7 @@ utils = require './latex-friend-utils'
 {_} = require 'lodash'
 {TreeItem} = require './models'
 {CompositeDisposable} = require 'atom'
+parser = require './parser'
 
 module.exports =
   class NavigationTreeView extends View
@@ -99,7 +100,7 @@ module.exports =
     generateNodes: ->
       # parse the file for navigation tags
       console.log('Generating nodes')
-      sections = utils.parseStructure()
+      sections = parser.parseStructure()
       root = new TreeItem(label: 'root', level: 0, row: 0)
       currentLevel = 0
       @nodes = [root]
