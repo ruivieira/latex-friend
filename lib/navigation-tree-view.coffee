@@ -3,6 +3,7 @@
 {TreeView} = require './tree-view'
 utils = require './latex-friend-utils'
 {_} = require 'lodash'
+{TreeItem} = require './models'
 {CompositeDisposable} = require 'atom'
 
 module.exports =
@@ -60,6 +61,7 @@ module.exports =
         @generateNodes()
         @show()
 
+        # TODO: change to subscription
         @onEditorSave = editor.onDidSave (state) =>
           filePath = editor.getPath()
           @generateNodes()
@@ -67,9 +69,6 @@ module.exports =
         @subscriptions.add editor.onDidChangeCursorPosition ({oldBufferPosition, newBufferPosition}) =>
           if oldBufferPosition.row != newBufferPosition.row
             @focusCurrentCursorTag()
-        # @onChangeRow = editor.onDidChangeCursorPosition ({oldBufferPosition, newBufferPosition}) =>
-          # if oldBufferPosition.row != newBufferPosition.row
-            # @focusCurrentCursorTag()
 
     focusCurrentCursorTag: ->
       # select on tree based on text
@@ -101,14 +100,16 @@ module.exports =
       # parse the file for navigation tags
       console.log('Generating nodes')
       sections = utils.parseStructure()
-      root = {label: 'root', icon: null, children: [], level: 0, position: {row: 0}}
+      root = new TreeItem(label: 'root', level: 0, row: 0)
       currentLevel = 0
-      currentParent = null
       @nodes = [root]
       for section in sections
         level = section.level
         parent = _.findLast(@nodes, (n) -> n.level < level)
-        node = {label: section.name, icon: null, children: [], level: section.level, position: {row: section.start}}
+        node = new TreeItem
+          label: section.name
+          level: section.level
+          row: section.start
         if parent == undefined
           root.children.push(node)
         else
@@ -121,7 +122,6 @@ module.exports =
           node.icon = 'icon-file-directory'
       @treeView.setRoot(root)
       return root
-
 
     # Returns an object that can be retrieved when package is activated
     serialize: ->
