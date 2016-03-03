@@ -5,6 +5,7 @@ A set of extra utilities for your LaTeX workflow.
 ## Insert references
 
 Use `ctrl-alt-r` to browse, select and insert references to a `\label`.
+References to formulas can be inserted as `\eqref` (enable in settings) but amsmath is required.
 
 ![latex-friend references](http://i.imgur.com/smSgjkO.gif)
 

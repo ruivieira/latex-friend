@@ -1,7 +1,7 @@
 {
   "name": "latex-friend",
   "main": "./lib/latex-friend",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Extra utilities for LaTeX editing",
   "keywords": [
   ],

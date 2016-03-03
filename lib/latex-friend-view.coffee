@@ -57,8 +57,9 @@ class exports.LatexFriendReferencesView extends SelectListView
 
   confirmed: (item) ->
     console.log("Confirming item #{item}")
+    ref = if item.slice(0, 3)=='eq:' and atom.config.get('latex-friend.useeqref') then "\\eqref{#{item}}" else "\\ref{#{item}}"
     editor = Utils.getActiveTextEditor()
-    editor.insertText("\\ref{#{item}}")
+    editor.insertText(ref)
     @cancel()
 
   cancel: ->

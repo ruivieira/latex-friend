@@ -46,3 +46,13 @@ exports.parseReferences = ->
     references.push(ref)
   console.log(references)
   return references
+
+exports.parsePackages = ->
+  editor = utils.getActiveTextEditor()
+  packages = []
+  editor.getBuffer().scan /\\(?:th)?usepackage{([^}]+)}/g, (match) =>
+    matchStr = match.matchText
+    p = matchStr.substring(matchStr.indexOf('{') + 1, matchStr.length - 1)
+    packages.push(p)
+  console.log(packages)
+  return packages

@@ -13,6 +13,14 @@ module.exports =
     command:
       type: "string"
       default: "displayline"
+    syncpdf:
+      type: 'boolean'
+      default: true
+    useeqref:
+      title: 'Use \\eqref'
+      description: 'If inserting a reference to \\label{eq:} use \\eqref (requires amsmath)'
+      type: 'boolean'
+      default: false
 
   latexFriendView: null
   LatexFriendNavigationView: null
@@ -20,6 +28,8 @@ module.exports =
   referencePanel: null
   subscriptions: null
   compiledCommandString: null
+
+  packages: []
 
   activate: (state) ->
     editor = Utils.getActiveTextEditor()

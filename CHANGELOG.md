@@ -1,3 +1,9 @@
+## 0.0.10
+
+### What's new?
+
+* References to formulas are inserted as `\eqref` (enable in Settings, amsmath is required)
+
 ## 0.0.9
 
 ### What's new?
