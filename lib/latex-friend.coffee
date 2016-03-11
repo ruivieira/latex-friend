@@ -63,14 +63,14 @@ module.exports =
     console.log('called [show navigation]')
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
-      structure = parser.parseStructure()
+      structure = new parser.StructureParser().parse()
       navigationView = new LatexFriendViews.LatexFriendNavigationView(structure: structure)
 
   showNavigationPane: ->
     console.log('started navigation pane')
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
-      structure = parser.parseStructure()
+      structure = new parser.StructureParser().parse()
       @navigationTreeView.showView()
 
   showTodos: ->

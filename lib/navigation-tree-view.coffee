@@ -100,7 +100,7 @@ module.exports =
     generateNodes: ->
       # parse the file for navigation tags
       console.log('Generating nodes')
-      sections = parser.parseStructure()
+      sections = new parser.StructureParser().parse()
       root = new TreeItem(label: 'root', level: 0, row: 0)
       currentLevel = 0
       @nodes = [root]
