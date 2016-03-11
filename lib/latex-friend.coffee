@@ -1,4 +1,4 @@
-LatexFriendViews = require './latex-friend-view'
+v = require './latex-friend-view'
 NavigationTreeView = require './navigation-tree-view'
 Utils = require './latex-friend-utils'
 {CompositeDisposable} = require 'atom'
@@ -64,7 +64,7 @@ module.exports =
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
       structure = new parser.StructureParser().parse()
-      navigationView = new LatexFriendViews.LatexFriendNavigationView(structure: structure)
+      navigationView = new v.LatexFriendNavigationView(structure: structure)
 
   showNavigationPane: ->
     console.log('started navigation pane')
@@ -77,15 +77,15 @@ module.exports =
     console.log('called [show todos]')
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
-      structure = parser.parseTodos()
-      view = new LatexFriendViews.LatextFriendsTodoView(structure)
+      structure = new parser.TodoParser().parse()
+      view = new v.LatextFriendsTodoView(structure)
 
   insertReference: ->
     console.log('called [insert reference]')
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
-      references = parser.parseReferences()
-      referenceView = new LatexFriendViews.LatexFriendReferencesView(references)
+      references = new parser.ReferenceParser().parse()
+      referenceView = new v.LatexFriendReferencesView(references)
 
   getBufferRow: (editor) ->
     return editor.getCursorBufferPosition()['row'] + 1
@@ -114,4 +114,4 @@ module.exports =
     console.log('called [matrix builder]')
     editor = Utils.getActiveTextEditor()
     if Utils.isLaTeXFile(editor)
-      view = new LatexFriendViews.MatrixBuilderView()
+      view = new v.MatrixBuilderView()
