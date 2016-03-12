@@ -24,6 +24,7 @@
     "atom-space-pen-views" : "^2.2.0",
     "space-pen" : "^5.1.2",
     "lodash" : "^4.5.1",
-    "event-kit" : "^2.0.0"
+    "event-kit" : "^2.0.0",
+    "text-buffer": "latest"
   }
 }
