@@ -101,16 +101,13 @@ module.exports =
       # parse the file for navigation tags
       console.log('Generating nodes')
       sections = new parser.StructureParser().parse()
-      root = new TreeItem(label: 'root', level: 0, row: 0)
+      root = new TreeItem('root', null, 0, 0)
       currentLevel = 0
       @nodes = [root]
       for section in sections
         level = section.level
         parent = _.findLast(@nodes, (n) -> n.level < level)
-        node = new TreeItem
-          label: section.name
-          level: section.level
-          row: section.start
+        node = new TreeItem(section.name, null, section.level, section.start)
         if parent == undefined
           root.children.push(node)
         else

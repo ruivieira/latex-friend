@@ -3,6 +3,9 @@
 ### What's new?
 
 * References to formulas are inserted as `\eqref` (enable in Settings, amsmath is required)
+* Structure pane now auto-hides when buffer is not LaTeX
+* Structure pane can now be closed by pressing again the shortcut (fixes #12)
+* Started migrating source from Coffeescript to Javascript
 
 ## 0.0.9
 

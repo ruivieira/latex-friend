@@ -17,7 +17,7 @@ only `\bmatrix` supported. Further customization in future releases!
 ## Navigation pane
 
 Provides a navigable tree with the document's sections.
-`ctrl-alt-p` or `Latex Friend:showNavigationPane` from the palette.
+`ctrl-alt-p` or `Latex Friend:showNavigationPane` from the palette (press it again to close it).
 
 ![navigation pane](http://i.imgur.com/ijJPDm3.png)
 
