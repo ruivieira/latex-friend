@@ -1,3 +1,10 @@
+## 0.0.11
+
+### Bug fixes
+
+* Fixed PDF sync methods scope (see #13)
+
+
 ## 0.0.10
 
 ### What's new?
