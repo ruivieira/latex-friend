@@ -1,3 +1,9 @@
+## 0.0.12
+
+### What's new?
+
+* `section` and `chapter` now show in the navigation pane (thanks to [Shevonar](https://github.com/Shevonar), 253ced51157cc347603ebca2fda12296aaa9b3ca)
+
 ## 0.0.11
 
 ### Bug fixes
