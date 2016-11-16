@@ -1,5 +1,5 @@
 'context-menu':
-  'atom-text-editor': [
+  'atom-text-editor[data-grammar*="text tex"]': [
     {
       'label': 'Sync PDF'
       'command': 'latex-friend:syncpdf'
